@@ -1,5 +1,7 @@
 /* Stock Manager API client — Phase 5.4 */
-const API_BASE = window.STOCK_MANAGER_API_URL || 'https://stock-manager-api-1kc3.onrender.com';
+const API_BASE =
+    window.STOCK_MANAGER_API_URL ||
+    "https://stock-manager-api-1kc3.onrender.com/api/v1";
 
 async function apiRequest(path, options = {}) {
   const response = await fetch(`${API_BASE}${path}`, {
