@@ -1,5 +1,5 @@
 /* Stock Manager API client — Phase 5.4 */
-const API_BASE = window.STOCK_MANAGER_API_URL || 'http://127.0.0.1:3000/api/v1';
+const API_BASE = window.STOCK_MANAGER_API_URL || 'https://stock-manager-api-1kc3.onrender.com';
 
 async function apiRequest(path, options = {}) {
   const response = await fetch(`${API_BASE}${path}`, {
@@ -31,3 +31,4 @@ window.StockManagerAPI = {
   expenses: (storeId, params='') => apiRequest(`/stores/${encodeURIComponent(storeId)}/expenses${params}`),
   createExpense: (storeId, payload) => apiRequest(`/stores/${encodeURIComponent(storeId)}/expenses`, {method:'POST', body:JSON.stringify(payload)})
 };
+
