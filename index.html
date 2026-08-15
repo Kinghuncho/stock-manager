@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Stock Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================================
+         SIDEBAR
+    ================================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">S</div>
+
+            <div>
+                <h2>Stock Manager</h2>
+                <span>Business Dashboard</span>
+            </div>
+        </div>
+
+        <nav class="navigation">
+
+            <p class="nav-title">MAIN</p>
+
+            <a href="#" class="nav-link active" data-page="dashboard">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="#" class="nav-link" data-page="inventory">
+                <span>📦</span>
+                Inventory
+            </a>
+
+            <a href="#" class="nav-link" data-page="purchases">
+                <span>🛒</span>
+                Purchases
+            </a>
+
+            <a href="#" class="nav-link" data-page="sales">
+                <span>💰</span>
+                Sales
+            </a>
+
+            <a href="#" class="nav-link" data-page="expenses">
+                <span>💸</span>
+                Expenses
+            </a>
+
+            <p class="nav-title">MANAGEMENT</p>
+
+            <a href="#" class="nav-link" data-page="reports">
+                <span>📈</span>
+                Reports
+            </a>
+
+            <a href="#" class="nav-link" data-page="settings">
+                <span>⚙️</span>
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <span>Stock Manager v1.0</span>
+        </div>
+
+    </aside>
+
+
+    <!-- ================================
+         MAIN CONTENT
+    ================================= -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <button class="menu-button" id="menuButton">
+                ☰
+            </button>
+
+            <div class="topbar-search">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    id="globalSearch"
+                    placeholder="Search products..."
+                >
+
+            </div>
+
+            <div class="topbar-actions">
+
+                <button class="icon-button" title="Notifications">
+                    🔔
+                </button>
+
+                <div class="user-profile">
+
+                    <div class="user-avatar">
+                        KH
+                    </div>
+
+                    <div class="user-info">
+
+                        <strong>Admin</strong>
+
+                        <span>
+                            Administrator
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================================
+             CONTENT
+        ================================= -->
+
+        <section class="content">
+
+
+            <!-- ================================
+                 DASHBOARD
+            ================================= -->
+
+            <div class="page active-page" id="dashboard">
+
+                <div class="page-header">
+
+                    <div>
+
+                        <p class="breadcrumb">
+                            Home / Dashboard
+                        </p>
+
+                        <h1>
+                            Dashboard
+                        </h1>
+
+                        <p class="page-description">
+                            Here's what's happening with your business today.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="primary-button"
+                        id="addProductButton"
+                    >
+                        + Add Product
+                    </button>
+
+                </div>
+
+
+                <!-- STATISTICS -->
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon inventory-icon">
+                            📦
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                Total Products
+                            </span>
+
+                            <strong id="totalProducts">
+                                0
+                            </strong>
+
+                            <small>
+                                Products in inventory
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon sales-icon">
+                            💰
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                Inventory Value
+                            </span>
+
+                            <strong id="inventoryValue">
+                                KSh 0
+                            </strong>
+
+                            <small>
+                                Buying value
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon expense-icon">
+                            ⚠️
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                Low Stock
+                            </span>
+
+                            <strong id="lowStockCount">
+                                0
+                            </strong>
+
+                            <small>
+                                Need attention
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon profit-icon">
+                            📈
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>
+                                Potential Profit
+                            </span>
+
+                            <strong id="potentialProfit">
+                                KSh 0
+                            </strong>
+
+                            <small>
+                                Current stock
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DASHBOARD GRID -->
+
+                <div class="dashboard-grid">
+
+
+                    <!-- LOW STOCK -->
+
+                    <div class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <h2>
+                                    Low Stock
+                                </h2>
+
+                                <p>
+                                    Products that need attention
+                                </p>
+
+                            </div>
+
+                            <button
+                                class="text-button"
+                                id="viewInventoryButton"
+                            >
+                                View Inventory
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="lowStockList"
+                            class="list-container"
+                        >
+
+                            <div class="empty-state">
+
+                                <span>
+                                    📦
+                                </span>
+
+                                <p>
+                                    No low-stock products
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- INVENTORY SUMMARY -->
+
+                    <div class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <h2>
+                                    Inventory Summary
+                                </h2>
+
+                                <p>
+                                    Current stock overview
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="inventorySummary"
+                            class="summary-container"
+                        >
+
+                            <div class="summary-row">
+
+                                <span>
+                                    Total Items
+                                </span>
+
+                                <strong id="summaryProducts">
+                                    0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-row">
+
+                                <span>
+                                    Stock Units
+                                </span>
+
+                                <strong id="summaryUnits">
+                                    0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-row">
+
+                                <span>
+                                    Inventory Value
+                                </span>
+
+                                <strong id="summaryValue">
+                                    KSh 0
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-row">
+
+                                <span>
+                                    Potential Revenue
+                                </span>
+
+                                <strong id="summaryRevenue">
+                                    KSh 0
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT INVENTORY -->
+
+                <div class="dashboard-card transactions-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>
+                                Current Inventory
+                            </h2>
+
+                            <p>
+                                Recently added products
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="text-button"
+                            id="viewAllInventory"
+                        >
+                            View All
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Product
+                                    </th>
+
+                                    <th>
+                                        Category
+                                    </th>
+
+                                    <th>
+                                        Quantity
+                                    </th>
+
+                                    <th>
+                                        Buying Price
+                                    </th>
+
+                                    <th>
+                                        Selling Price
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="dashboardInventoryTable">
+
+                                <tr>
+
+                                    <td
+                                        colspan="6"
+                                        class="table-empty"
+                                    >
+                                        No products yet
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================
+                 INVENTORY
+            ================================= -->
+
+            <div
+                class="page"
+                id="inventory"
+            >
+
+                <div class="page-header">
+
+                    <div>
+
+                        <p class="breadcrumb">
+                            Home / Inventory
+                        </p>
+
+                        <h1>
+                            Inventory
+                        </h1>
+
+                        <p class="page-description">
+                            Manage your products and stock levels.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="primary-button"
+                        id="inventoryAddButton"
+                    >
+                        + Add Product
+                    </button>
+
+                </div>
+
+
+                <!-- INVENTORY TOOLBAR -->
+
+                <div class="inventory-toolbar">
+
+                    <div class="inventory-search">
+
+                        <span>
+                            🔍
+                        </span>
+
+                        <input
+                            type="text"
+                            id="inventorySearch"
+                            placeholder="Search inventory..."
+                        >
+
+                    </div>
+
+
+                    <select
+                        id="categoryFilter"
+                        class="filter-select"
+                    >
+
+                        <option value="all">
+                            All Categories
+                        </option>
+
+                        <option value="Food">
+                            Food
+                        </option>
+
+                        <option value="Beverages">
+                            Beverages
+                        </option>
+
+                        <option value="Household">
+                            Household
+                        </option>
+
+                        <option value="Electronics">
+                            Electronics
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="stockFilter"
+                        class="filter-select"
+                    >
+
+                        <option value="all">
+                            All Stock
+                        </option>
+
+                        <option value="normal">
+                            Normal Stock
+                        </option>
+
+                        <option value="low">
+                            Low Stock
+                        </option>
+
+                        <option value="out">
+                            Out of Stock
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- INVENTORY TABLE -->
+
+                <div class="dashboard-card">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Product
+                                    </th>
+
+                                    <th>
+                                        Category
+                                    </th>
+
+                                    <th>
+                                        Quantity
+                                    </th>
+
+                                    <th>
+                                        Buying Price
+                                    </th>
+
+                                    <th>
+                                        Selling Price
+                                    </th>
+
+                                    <th>
+                                        Stock Value
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Actions
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="inventoryTable">
+
+                                <tr>
+
+                                    <td
+                                        colspan="8"
+                                        class="table-empty"
+                                    >
+                                        No products yet
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================
+                 PURCHASES
+            ================================= -->
+
+           <div
+    class="page"
+    id="purchases"
+>
+
+    <div class="page-header">
+
+        <div>
+
+            <p class="breadcrumb">
+                Home / Purchases
+            </p>
+
+            <h1>
+                Purchases
+            </h1>
+
+            <p class="page-description">
+                Track products purchased for your business.
+            </p>
+
+        </div>
+
+
+        <div class="page-header-actions">
+            <button
+                class="secondary-button"
+                id="exportPurchasesCsvButton"
+                type="button"
+            >
+                📥 Export CSV
+            </button>
+            <button
+                class="primary-button"
+                id="addPurchaseButton"
+            >
+                + Record Purchase
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- PURCHASE STATISTICS -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon inventory-icon">
+                🛒
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Total Purchases
+                </span>
+
+                <strong id="totalPurchases">
+                    0
+                </strong>
+
+                <small>
+                    Purchase records
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon expense-icon">
+                💰
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Purchase Spending
+                </span>
+
+                <strong id="purchaseSpending">
+                    KSh 0
+                </strong>
+
+                <small>
+                    Total amount spent
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon sales-icon">
+                📦
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Units Purchased
+                </span>
+
+                <strong id="purchasedUnits">
+                    0
+                </strong>
+
+                <small>
+                    Total units
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon profit-icon">
+                📅
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Latest Purchase
+                </span>
+
+                <strong id="latestPurchase">
+                    —
+                </strong>
+
+                <small>
+                    Most recent activity
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PURCHASE HISTORY -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Purchase History
+                </h2>
+
+                <p>
+                    Recently recorded purchases.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Product
+                        </th>
+
+                        <th>
+                            Quantity
+                        </th>
+
+                        <th>
+                            Unit Cost
+                        </th>
+
+                        <th>
+                            Total
+                        </th>
+
+                        <th>
+                            Supplier
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Reference
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="purchaseTable">
+
+                    <tr>
+
+                        <td
+                            colspan="8"
+                            class="table-empty"
+                        >
+                            No purchases recorded yet
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+            <!-- ================================
+     SALES
+================================= -->
+
+<div
+    class="page"
+    id="sales"
+>
+
+    <div class="page-header">
+
+        <div>
+
+            <p class="breadcrumb">
+                Home / Sales
+            </p>
+
+            <h1>
+                Sales
+            </h1>
+
+            <p class="page-description">
+                Track your business sales and revenue.
+            </p>
+
+        </div>
+
+
+        <div class="page-header-actions">
+            <button
+                class="secondary-button"
+                id="exportSalesCsvButton"
+                type="button"
+            >
+                📥 Export CSV
+            </button>
+            <button
+                class="primary-button"
+                id="addSaleButton"
+            >
+                + Add Sale
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- SALES STATISTICS -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon sales-icon">
+                💰
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Total Sales
+                </span>
+
+                <strong id="totalSales">
+                    0
+                </strong>
+
+                <small>
+                    Sales records
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon profit-icon">
+                💵
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Total Revenue
+                </span>
+
+                <strong id="salesRevenue">
+                    KSh 0
+                </strong>
+
+                <small>
+                    Money received
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon inventory-icon">
+                📦
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Units Sold
+                </span>
+
+                <strong id="soldUnits">
+                    0
+                </strong>
+
+                <small>
+                    Total units sold
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon expense-icon">
+                📈
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Today's Sales
+                </span>
+
+                <strong id="todaySales">
+                    KSh 0
+                </strong>
+
+                <small>
+                    Revenue today
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SALES HISTORY -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Sales History
+                </h2>
+
+                <p>
+                    Recently recorded sales.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Product
+                        </th>
+
+                        <th>
+                            Quantity
+                        </th>
+
+                        <th>
+                            Unit Price
+                        </th>
+
+                        <th>
+                            Total
+                        </th>
+
+                        <th>
+                            Customer
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="salesTable">
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="table-empty"
+                        >
+                            No sales recorded yet
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+            <!-- ================================
+     EXPENSES
+================================= -->
+
+<div
+    class="page"
+    id="expenses"
+>
+
+    <div class="page-header">
+
+        <div>
+
+            <p class="breadcrumb">
+                Home / Expenses
+            </p>
+
+            <h1>
+                Expenses
+            </h1>
+
+            <p class="page-description">
+                Track and manage your business expenses.
+            </p>
+
+        </div>
+
+
+        <div class="page-header-actions">
+            <button
+                class="secondary-button"
+                id="exportExpensesCsvButton"
+                type="button"
+            >
+                📥 Export CSV
+            </button>
+            <button
+                class="primary-button"
+                id="addExpenseButton"
+            >
+                + Add Expense
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- EXPENSE STATISTICS -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon expense-icon">
+                💸
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Total Expenses
+                </span>
+
+                <strong id="totalExpenses">
+                    0
+                </strong>
+
+                <small>
+                    Expense records
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon sales-icon">
+                💰
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Total Spending
+                </span>
+
+                <strong id="expenseSpending">
+                    KSh 0
+                </strong>
+
+                <small>
+                    Total amount spent
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon inventory-icon">
+                📅
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    This Month
+                </span>
+
+                <strong id="monthlyExpenses">
+                    KSh 0
+                </strong>
+
+                <small>
+                    Current month spending
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon profit-icon">
+                🧾
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Latest Expense
+                </span>
+
+                <strong id="latestExpense">
+                    —
+                </strong>
+
+                <small>
+                    Most recent activity
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- EXPENSE HISTORY -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Expense History
+                </h2>
+
+                <p>
+                    Recently recorded business expenses.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Expense
+                        </th>
+
+                        <th>
+                            Category
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Description
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="expenseTable">
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="table-empty"
+                        >
+                            No expenses recorded yet
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+            <!-- ================================
+                 REPORTS
+            ================================= -->
+
+            <div
+                class="page"
+                id="reports"
+            >
+
+                <div class="page-header">
+                    <div>
+                        <p class="breadcrumb">Home / Reports</p>
+                        <h1>Reports</h1>
+                        <p class="page-description">Analyze your sales, purchases, expenses and profit.</p>
+                    </div>
+                </div>
+
+                <div class="reports-toolbar dashboard-card">
+                    <div class="reports-periods">
+                        <button class="report-filter active" data-report-period="all">All Time</button>
+                        <button class="report-filter" data-report-period="today">Today</button>
+                        <button class="report-filter" data-report-period="week">This Week</button>
+                        <button class="report-filter" data-report-period="month">This Month</button>
+                        <button class="report-filter" data-report-period="year">This Year</button>
+                    </div>
+                    <div class="report-custom-dates">
+                        <label>From <input type="date" id="reportStartDate"></label>
+                        <label>To <input type="date" id="reportEndDate"></label>
+                        <button class="secondary-button" id="applyReportDates">Apply</button>
+                        <button class="primary-button" id="exportReportCsvButton" type="button">📊 Export Report</button>
+                    </div>
+                </div>
+
+                <div class="stats-grid reports-stats-grid">
+                    <div class="stat-card"><div class="stat-icon sales-icon">💰</div><div class="stat-content"><span>Sales Revenue</span><strong id="reportRevenue">KSh 0</strong><small>Selected period</small></div></div>
+                    <div class="stat-card"><div class="stat-icon inventory-icon">🛒</div><div class="stat-content"><span>Purchases</span><strong id="reportPurchases">KSh 0</strong><small>Stock spending</small></div></div>
+                    <div class="stat-card"><div class="stat-icon expense-icon">💸</div><div class="stat-content"><span>Expenses</span><strong id="reportExpenses">KSh 0</strong><small>Business expenses</small></div></div>
+                    <div class="stat-card"><div class="stat-icon profit-icon">📈</div><div class="stat-content"><span>Net Profit</span><strong id="reportNetProfit">KSh 0</strong><small>Revenue − stock cost − expenses</small></div></div>
+                </div>
+
+                <div class="reports-secondary-grid">
+                    <div class="dashboard-card">
+                        <div class="card-header"><div><h2>Sales Performance</h2><p>What your business sold during the selected period.</p></div></div>
+                        <div class="summary-container">
+                            <div class="summary-row"><span>Number of Sales</span><strong id="reportSalesCount">0</strong></div>
+                            <div class="summary-row"><span>Units Sold</span><strong id="reportUnitsSold">0</strong></div>
+                            <div class="summary-row"><span>Cost of Goods Sold</span><strong id="reportCogs">KSh 0</strong></div>
+                            <div class="summary-row"><span>Gross Profit</span><strong id="reportGrossProfit">KSh 0</strong></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-header"><div><h2>Inventory Snapshot</h2><p>Current stock position.</p></div></div>
+                        <div class="summary-container">
+                            <div class="summary-row"><span>Products</span><strong id="reportProductCount">0</strong></div>
+                            <div class="summary-row"><span>Stock Units</span><strong id="reportStockUnits">0</strong></div>
+                            <div class="summary-row"><span>Inventory Value</span><strong id="reportInventoryValue">KSh 0</strong></div>
+                            <div class="summary-row"><span>Potential Revenue</span><strong id="reportPotentialRevenue">KSh 0</strong></div>
+                            <div class="summary-row"><span>Potential Profit</span><strong id="reportPotentialProfit">KSh 0</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reports-secondary-grid">
+                    <div class="dashboard-card">
+                        <div class="card-header"><div><h2>Top Products</h2><p>Best sellers by units sold.</p></div></div>
+                        <div class="table-wrapper"><table><thead><tr><th>Product</th><th>Units</th><th>Revenue</th><th>Profit</th></tr></thead><tbody id="reportTopProducts"><tr><td colspan="4" class="table-empty">No sales in this period</td></tr></tbody></table></div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-header"><div><h2>Expense Breakdown</h2><p>Spending by category.</p></div></div>
+                        <div class="table-wrapper"><table><thead><tr><th>Category</th><th>Transactions</th><th>Total</th></tr></thead><tbody id="reportExpenseBreakdown"><tr><td colspan="3" class="table-empty">No expenses in this period</td></tr></tbody></table></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card transactions-card">
+                    <div class="card-header"><div><h2>Recent Activity</h2><p>Latest sales, purchases and expenses in the selected period.</p></div></div>
+                    <div class="table-wrapper"><table><thead><tr><th>Type</th><th>Description</th><th>Amount</th><th>Date</th></tr></thead><tbody id="reportRecentActivity"><tr><td colspan="4" class="table-empty">No activity in this period</td></tr></tbody></table></div>
+                </div>
+
+            </div>
+
+
+            <!-- ================================
+                 SETTINGS
+            ================================= -->
+
+            <div
+                class="page"
+                id="settings"
+            >
+
+                <div class="page-header">
+
+                    <div>
+
+                        <p class="breadcrumb">
+                            Home / Settings
+                        </p>
+
+                        <h1>
+                            Settings
+                        </h1>
+
+                        <p class="page-description">
+                            Manage your store, preferences and application settings.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUSINESS PROFILE -->
+
+                <div class="settings-card">
+
+                    <div class="settings-card-header">
+
+                        <div class="settings-icon">🏪</div>
+
+                        <div>
+                            <h2>Business Profile</h2>
+                            <p>Set the basic information for your store.</p>
+                        </div>
+
+                    </div>
+
+                    <form id="businessSettingsForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label for="storeName">Store / Business Name</label>
+                                <input type="text" id="storeName" placeholder="e.g. Huncho Mini Mart" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="storePhone">Business Phone</label>
+                                <input type="tel" id="storePhone" placeholder="e.g. 0712 345 678">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="storeEmail">Business Email</label>
+                                <input type="email" id="storeEmail" placeholder="e.g. store@example.com">
+                            </div>
+
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label for="storeLocation">Business Location</label>
+                                <input type="text" id="storeLocation" placeholder="e.g. Nairobi, Kenya">
+                            </div>
+
+                        </div>
+
+                        <div class="settings-actions">
+                            <button type="submit" class="primary-button">Save Business Profile</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- LANGUAGE & REGIONAL -->
+
+                <div class="settings-card">
+
+                    <div class="settings-card-header">
+
+                        <div class="settings-icon">🌍</div>
+
+                        <div>
+                            <h2>Language & Regional Settings</h2>
+                            <p>Choose how your business information is displayed.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="languageSetting">Language</label>
+                            <select id="languageSetting">
+                                <option value="en">🇬🇧 English</option>
+                                <option value="sw">🇰🇪 Kiswahili</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="currencySetting">Currency</label>
+                            <select id="currencySetting">
+                                <option value="KES">KSh — Kenyan Shilling</option>
+                                <option value="USD">$ — US Dollar</option>
+                                <option value="EUR">€ — Euro</option>
+                                <option value="GBP">£ — British Pound</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateFormatSetting">Date Format</label>
+                            <select id="dateFormatSetting">
+                                <option value="short">11 Aug 2026</option>
+                                <option value="numeric">11/08/2026</option>
+                                <option value="long">August 11, 2026</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="settings-actions">
+                        <button type="button" class="primary-button" id="saveRegionalSettings">Save Regional Settings</button>
+                    </div>
+
+                </div>
+
+
+                <!-- NOTIFICATIONS -->
+
+                <div class="settings-card">
+
+                    <div class="settings-card-header">
+
+                        <div class="settings-icon">🔔</div>
+
+                        <div>
+                            <h2>Notifications</h2>
+                            <p>Control important business alerts.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="settings-option">
+                        <div>
+                            <strong>Low Stock Alerts</strong>
+                            <p>Notify me when products reach their low-stock limit.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="lowStockNotifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="settings-option">
+                        <div>
+                            <strong>Transaction Notifications</strong>
+                            <p>Show notifications after sales, purchases and expenses.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="transactionNotifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+
+
+                <!-- ACCOUNT -->
+
+                <div class="settings-card">
+
+                    <div class="settings-card-header">
+
+                        <div class="settings-icon">👤</div>
+
+                        <div>
+                            <h2>Account</h2>
+                            <p>Manage your administrator account.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="account-preview">
+                        <div class="user-avatar large" id="settingsAvatar">AD</div>
+                        <div>
+                            <strong id="settingsAccountName">Administrator</strong>
+                            <p id="settingsAccountEmail">Administrator account</p>
+                        </div>
+                    </div>
+
+                    <div class="form-grid settings-account-fields">
+                        <div class="form-group">
+                            <label for="accountDisplayName">Display Name</label>
+                            <input type="text" id="accountDisplayName" placeholder="e.g. Admin">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="accountEmail">Login Email</label>
+                            <input type="email" id="accountEmail" placeholder="e.g. admin@store.com">
+                        </div>
+                    </div>
+
+                    <div class="settings-actions">
+                        <button type="button" class="primary-button" id="saveAccountButton">Save Account Profile</button>
+                        <button type="button" class="secondary-button" id="changePasswordButton">🔒 Change Password</button>
+                        <button type="button" class="secondary-button" id="logoutButton">🚪 Logout</button>
+                    </div>
+
+                    <small class="settings-note">
+                        Account authentication will be connected to a secure backend in the security stage.
+                    </small>
+
+                </div>
+
+
+                <!-- DATA MANAGEMENT -->
+
+                <div class="settings-card">
+
+                    <div class="settings-card-header">
+
+                        <div class="settings-icon">💾</div>
+
+                        <div>
+                            <h2>Data Management</h2>
+                            <p>Backup or reset your Stock Manager data.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="settings-actions">
+                        <button type="button" class="secondary-button" id="exportDataButton">📥 Export Data</button>
+                        <button type="button" class="secondary-button danger-button" id="resetDataButton">🗑️ Reset Application Data</button>
+                    </div>
+
+                    <small class="settings-note">
+                        Export your data before resetting the application.
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- ================================
+     PRODUCT MODAL
+================================= -->
+<div class="modal-overlay" id="productModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div>
+                <h2 id="modalTitle">Add Product</h2>
+                <p>Add or update a product in your inventory.</p>
+            </div>
+            <button type="button" class="modal-close" id="closeModal">×</button>
+        </div>
+        <form id="productForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input type="text" id="productName" placeholder="e.g. Sugar" required>
+                </div>
+                <div class="form-group">
+                    <label for="productCategory">Category</label>
+                    <select id="productCategory" required>
+                        <option value="">Select category</option>
+                        <option value="Food">Food</option>
+                        <option value="Beverages">Beverages</option>
+                        <option value="Household">Household</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productQuantity">Quantity</label>
+                    <input type="number" id="productQuantity" min="0" placeholder="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="lowStockLimit">Low Stock Limit</label>
+                    <input type="number" id="lowStockLimit" min="0" placeholder="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="buyingPrice">Buying Price (KSh)</label>
+                    <input type="number" id="buyingPrice" min="0" step="0.01" placeholder="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="sellingPrice">Selling Price (KSh)</label>
+                    <input type="number" id="sellingPrice" min="0" step="0.01" placeholder="0" required>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="secondary-button" id="cancelProduct">Cancel</button>
+                <button type="submit" class="primary-button" id="saveProductButton">Add Product</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ================================
+     PURCHASE MODAL
+================================= -->
+<div class="modal-overlay" id="purchaseModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div>
+                <h2>Record Purchase</h2>
+                <p>Add stock purchased for your business.</p>
+            </div>
+            <button type="button" class="modal-close" id="closePurchaseModal">×</button>
+        </div>
+        <form id="purchaseForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="purchaseProduct">Product</label>
+                    <select id="purchaseProduct" required>
+                        <option value="">Select product</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="purchaseQuantity">Quantity Purchased</label>
+                    <input type="number" id="purchaseQuantity" min="1" placeholder="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="purchaseUnitCost">Unit Cost (KSh)</label>
+                    <input type="number" id="purchaseUnitCost" min="0" step="0.01" placeholder="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="purchaseSupplier">Supplier</label>
+                    <input type="text" id="purchaseSupplier" placeholder="e.g. Naivas Supplier">
+                </div>
+                <div class="form-group">
+                    <label for="purchaseDate">Purchase Date</label>
+                    <input type="date" id="purchaseDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="purchaseReference">Reference / Invoice No.</label>
+                    <input type="text" id="purchaseReference" placeholder="Optional">
+                </div>
+            </div>
+            <div class="purchase-total-box">
+                <span>Total Purchase Cost</span>
+                <strong id="purchaseTotal">KSh 0</strong>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="secondary-button" id="cancelPurchase">Cancel</button>
+                <button type="submit" class="primary-button">Record Purchase</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ================================
+     SALES MODAL
+================================= -->
+<div class="modal-overlay" id="saleModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div>
+                <h2>Add Sale</h2>
+                <p>Record a product sale.</p>
+            </div>
+            <button type="button" class="modal-close" id="closeSaleModal">×</button>
+        </div>
+        <form id="saleForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="saleProduct">Product</label>
+                    <select id="saleProduct" required>
+                        <option value="">Select product</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="saleQuantity">Quantity Sold</label>
+                    <input type="number" id="saleQuantity" min="1" placeholder="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="saleUnitPrice">Selling Price (KSh)</label>
+                    <input type="number" id="saleUnitPrice" min="0" step="0.01" placeholder="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="saleCustomer">Customer</label>
+                    <input type="text" id="saleCustomer" placeholder="Optional">
+                </div>
+                <div class="form-group">
+                    <label for="saleDate">Sale Date</label>
+                    <input type="date" id="saleDate" required>
+                </div>
+            </div>
+            <div class="purchase-total-box">
+                <span>Total Sale</span>
+                <strong id="saleTotal">KSh 0</strong>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="secondary-button" id="cancelSale">Cancel</button>
+                <button type="submit" class="primary-button">Save Sale</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ================================
+     EXPENSE MODAL
+================================= -->
+<div class="modal-overlay" id="expenseModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div>
+                <h2>Add Expense</h2>
+                <p>Record a business expense.</p>
+            </div>
+            <button type="button" class="modal-close" id="closeExpenseModal">×</button>
+        </div>
+        <form id="expenseForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="expenseName">Expense Name</label>
+                    <input type="text" id="expenseName" placeholder="e.g. Electricity" required>
+                </div>
+                <div class="form-group">
+                    <label for="expenseCategory">Category</label>
+                    <select id="expenseCategory" required>
+                        <option value="">Select category</option>
+                        <option value="Rent">Rent</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Transport">Transport</option>
+                        <option value="Salaries">Salaries</option>
+                        <option value="Supplies">Supplies</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="expenseAmount">Amount (KSh)</label>
+                    <input type="number" id="expenseAmount" min="0" step="0.01" placeholder="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="expenseDate">Expense Date</label>
+                    <input type="date" id="expenseDate" required>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label for="expenseDescription">Description</label>
+                    <textarea id="expenseDescription" rows="3" placeholder="Optional description"></textarea>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="secondary-button" id="cancelExpense">Cancel</button>
+                <button type="submit" class="primary-button">Save Expense</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- ================================
+     AUTHENTICATION GATE
+================================= -->
+<div class="auth-screen" id="authScreen">
+    <div class="auth-card">
+        <div class="auth-brand">
+            <div class="auth-logo">S</div>
+            <div>
+                <h1>Stock Manager</h1>
+                <p>Secure business access</p>
+            </div>
+        </div>
+
+        <div class="auth-view" id="loginView">
+            <div class="auth-heading">
+                <h2>Welcome back</h2>
+                <p>Sign in to manage your store.</p>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="admin@example.com" required autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="password-field">
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password">
+                        <button type="button" class="password-toggle" data-target="loginPassword">Show</button>
+                    </div>
+                </div>
+
+                <label class="remember-row">
+                    <input type="checkbox" id="rememberSession">
+                    <span>Keep me signed in on this device</span>
+                </label>
+
+                <button type="submit" class="primary-button auth-submit">Sign In</button>
+                <p class="auth-message" id="loginMessage"></p>
+            </form>
+        </div>
+
+        <div class="auth-view" id="setupView" hidden>
+            <div class="auth-heading">
+                <h2>Set up administrator</h2>
+                <p>Create the first account for this Stock Manager installation.</p>
+            </div>
+
+            <form id="setupForm" class="auth-form">
+                <div class="form-group">
+                    <label for="setupName">Administrator Name</label>
+                    <input type="text" id="setupName" placeholder="e.g. John" required autocomplete="name">
+                </div>
+
+                <div class="form-group">
+                    <label for="setupEmail">Email</label>
+                    <input type="email" id="setupEmail" placeholder="admin@example.com" required autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="setupPassword">Password</label>
+                    <div class="password-field">
+                        <input type="password" id="setupPassword" placeholder="At least 8 characters" minlength="8" required autocomplete="new-password">
+                        <button type="button" class="password-toggle" data-target="setupPassword">Show</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="setupConfirmPassword">Confirm Password</label>
+                    <div class="password-field">
+                        <input type="password" id="setupConfirmPassword" placeholder="Repeat your password" minlength="8" required autocomplete="new-password">
+                        <button type="button" class="password-toggle" data-target="setupConfirmPassword">Show</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="primary-button auth-submit">Create Secure Account</button>
+                <p class="auth-message" id="setupMessage"></p>
+            </form>
+        </div>
+
+        <div class="auth-view" id="changePasswordView" hidden>
+            <div class="auth-heading">
+                <h2>Change password</h2>
+                <p>Update the administrator password for this device.</p>
+            </div>
+
+            <form id="changePasswordForm" class="auth-form">
+                <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" required autocomplete="current-password">
+                </div>
+
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" minlength="8" required autocomplete="new-password">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmNewPassword">Confirm New Password</label>
+                    <input type="password" id="confirmNewPassword" minlength="8" required autocomplete="new-password">
+                </div>
+
+                <button type="submit" class="primary-button auth-submit">Update Password</button>
+                <button type="button" class="secondary-button auth-secondary" id="cancelPasswordChange">Cancel</button>
+                <p class="auth-message" id="passwordMessage"></p>
+            </form>
+        </div>
+
+        <div class="auth-footer">
+            <span>Stock Manager v1.0</span>
+            <span>Administrator access</span>
+        </div>
+    </div>
+</div>
+
+<script src="api-client.js"></script>
+<script src="cloud-integration.js"></script>
+<script src="cloud-pages.js"></script>
+<script src="cloud-auth.js"></script>
+<script src="script.js"></script>
+<script src="cloud-inventory.js"></script>
+
+</body>
+</html>
