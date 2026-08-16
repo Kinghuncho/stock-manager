@@ -241,11 +241,3 @@ Links
 📄 License
 
 This project was created as a personal development and portfolio project.
-
-### One correction from our earlier README
-
-I **wouldn't claim CSV export/data backup in this README unless we verify those features in the final repository**. The actual repo clearly supports the full-stack architecture and the inventory/sales/purchases/expenses/reporting/authentication functionality, so those are safe to highlight. 
-
-And bro, this version makes your GitHub repository look **much more serious**. A recruiter clicking your pinned Stock Manager project will immediately see that you didn't just make a pretty frontend—you built an application with **Node.js + Express + PostgreSQL + authentication + REST APIs + business logic**. 🔥
-
-If you want, I can also **:contentReference[oaicite:5]{index=5}** for you using the repository connection, so you don't have to copy/paste it manually.
